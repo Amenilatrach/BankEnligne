@@ -1,0 +1,22 @@
+{"properties": [
+  {
+    "name": "twilio",
+    "type": "java.lang.String",
+    "description": "A description for 'twilio'"
+  },
+  {
+    "name": "account_sid",
+    "type": "java.lang.String",
+    "description": "A description for 'account_sid'"
+  },
+  {
+    "name": "trial_number",
+    "type": "java.lang.String",
+    "description": "A description for 'trial_number'"
+  },
+  {
+    "name": "auth_token",
+    "type": "java.lang.String",
+    "description": "A description for 'auth_token'"
+  }
+]}
