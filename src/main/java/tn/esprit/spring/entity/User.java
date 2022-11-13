@@ -1,0 +1,93 @@
+package tn.esprit.spring.entity;
+
+import javax.persistence.*;
+
+import java.io.Serializable;
+import java.util.Date;
+import java.util.Set;
+
+@Entity
+public class User implements Serializable{
+	
+    @Id
+    private String userName;
+    private String userFirstName;
+    private String userLastName;
+	private String userPassword;
+    private String Email;
+    private String confirmUserPassword;
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(name = "USER_ROLE",
+            joinColumns = {
+                    @JoinColumn(name = "USER_ID")
+            },
+            inverseJoinColumns = {
+                    @JoinColumn(name = "ROLE_ID")
+            }
+    )
+    private Set<Role> role;
+    public String getEmail() {
+  		return Email;
+  	}
+
+
+
+  	public void setEmail(String email) {
+  		Email = email;
+  	}
+
+    public String getUserName() {
+        return userName;
+    }
+
+ 
+
+	public String getConfirmUserPassword() {
+		return confirmUserPassword;
+	}
+
+
+
+	public void setConfirmUserPassword(String confirmUserPassword) {
+		this.confirmUserPassword = confirmUserPassword;
+	}
+
+
+
+	public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getUserFirstName() {
+        return userFirstName;
+    }
+
+    public void setUserFirstName(String userFirstName) {
+        this.userFirstName = userFirstName;
+    }
+
+    public String getUserLastName() {
+        return userLastName;
+    }
+
+    public void setUserLastName(String userLastName) {
+        this.userLastName = userLastName;
+    }
+
+    public String getUserPassword() {
+        return userPassword;
+    }
+
+    public void setUserPassword(String userPassword) {
+        this.userPassword = userPassword;
+    }
+
+    public Set<Role> getRole() {
+        return role;
+    }
+
+    public void setRole(Set<Role> role) {
+        this.role = role;
+    }
+
+}
