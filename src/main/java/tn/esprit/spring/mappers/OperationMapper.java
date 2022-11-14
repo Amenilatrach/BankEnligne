@@ -1,5 +1,6 @@
 package tn.esprit.spring.mappers;
 
+import tn.esprit.spring.Dto.CompteBancaireDto;
 import tn.esprit.spring.Dto.OperationDto;
 import tn.esprit.spring.entity.Operation;
 
@@ -20,7 +21,7 @@ public class OperationMapper {
     {
         Operation operation = new Operation ();
         operation.setId (operationDto.getId ());
-        operation.setCompteBancaire (PatientMapper.patientDtoToPatient (new PatientDto (operationDto.getCompteBancaireId ())));
+        operation.setCompteBancaire (CompteBancaireMapper.compteBancaireDtoToCompteBancaire (new CompteBancaireDto (operationDto.getCompteBancaireId ())));
         return operation;
     }
 

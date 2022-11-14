@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.EqualsAndHashCode;
 import org.springframework.data.annotation.CreatedDate;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -11,6 +12,7 @@ import javax.persistence.OneToOne;
 import java.io.Serializable;
 import java.util.Date;
 
+@Entity
 public class Operation implements Serializable {
     @EqualsAndHashCode.Include
     @Id
@@ -25,10 +27,8 @@ public class Operation implements Serializable {
     @OneToOne
     private CompteBancaire compteBancaire;
 
-    public Operation(CompteBancaire compteBancaire, String nom ,Float montant){
+    public Operation(CompteBancaire compteBancaire){
         this.compteBancaire = compteBancaire;
-        this.nom = nom;
-        this.montant = montant;
     }
 
     public Operation() {
