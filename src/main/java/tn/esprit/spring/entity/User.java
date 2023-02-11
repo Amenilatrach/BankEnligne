@@ -10,12 +10,13 @@ import java.util.Set;
 public class User implements Serializable{
 	
     @Id
-    private String userName;
+	public String userName;
     private String userFirstName;
     private String userLastName;
 	private String userPassword;
-    private String Email;
+    private String email;
     private String confirmUserPassword;
+    
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "USER_ROLE",
             joinColumns = {
@@ -26,17 +27,21 @@ public class User implements Serializable{
             }
     )
     private Set<Role> role;
+
+
     public String getEmail() {
-  		return Email;
-  	}
+		return email;
+	}
 
 
 
-  	public void setEmail(String email) {
-  		Email = email;
-  	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
-    public String getUserName() {
+
+
+	public String getUserName() {
         return userName;
     }
 

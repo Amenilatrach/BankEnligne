@@ -11,6 +11,9 @@ import tn.esprit.spring.entity.User;
 @Repository
 public interface UserDao extends CrudRepository<User, String> {
 
+	User findByEmail(String email);
+
+
 
 
 
