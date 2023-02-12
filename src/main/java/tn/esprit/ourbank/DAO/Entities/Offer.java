@@ -55,6 +55,14 @@ public class Offer implements Serializable {
 		this.score = score;
 	}
     
+    public Offer(int id, double sum, double promotion/*, double score*/) {
+  		super();
+  		this.id = id;
+  		this.sum = sum;
+  		this.promotion = promotion;
+  		//this.score = score;
+  	}
+    
     public Offer(int id, String name, double sum, double promotion, int nbajout, int clusterNumber, Date datedeb,
 			Date datefin, double score) {
 		super();
@@ -72,11 +80,7 @@ public class Offer implements Serializable {
 	private double score = 0.0;
     
 
-  
-
-
-
-
+ 
 	@Override
 	public String toString() {
 		return "Offer [id=" + id + ", sum=" + sum + ", promotion=" + promotion + ", clusterNumber=" + clusterNumber
