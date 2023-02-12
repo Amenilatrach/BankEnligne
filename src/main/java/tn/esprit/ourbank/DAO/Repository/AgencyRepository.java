@@ -2,6 +2,8 @@ package tn.esprit.ourbank.DAO.Repository;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -24,8 +26,8 @@ public interface AgencyRepository extends CrudRepository<Agency, Integer> {
 	//	public List<Staff> nbStaff();
 	
 	
-	//@Query("Update Staff s set s.agency_id = :id")
-	//public void UpdateStaffClosestAgency(@Param("id") int id);
+	
+
 	
 	
 	//*******************
