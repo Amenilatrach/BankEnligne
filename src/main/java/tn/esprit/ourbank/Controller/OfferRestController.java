@@ -39,8 +39,11 @@ import org.springframework.http.HttpStatus;
 
 import tn.esprit.ourbank.DAO.Entities.Offer;
 import tn.esprit.ourbank.DAO.Entities.SmsRequest;
+import tn.esprit.ourbank.DAO.Entities.Userr;
 import tn.esprit.ourbank.DAO.Repository.OfferRepository;
+import tn.esprit.ourbank.DAO.Repository.UserrRepository;
 import tn.esprit.ourbank.Dto.Response;
+import tn.esprit.ourbank.Dto.UserDto;
 import tn.esprit.ourbank.Service.Implementation.EmailSenderService;
 import tn.esprit.ourbank.Service.Interface.OfferService;
 import tn.esprit.ourbank.Service.Interface.SmsSenderService;
@@ -60,6 +63,9 @@ public class OfferRestController {
 	
 	@Autowired
 	OfferRepository offerRepository;
+	
+	@Autowired
+	UserrRepository userRepository;
 	
 	@GetMapping("allOffers")
 	public List<Offer> GetAllOffers(){
@@ -230,6 +236,10 @@ public class OfferRestController {
        if (offr != null)
        {
     	   smsSenderService.sendSms();
+    	   EmailService.sendEmailWithAttachment("ahmed.hamadi@esprit.tn",
+    				"Check out our latest and Special Offer",
+    				"Brand New Offers",
+   				"C:\\Users\\MSI\\Desktop\\3eme\\Projet_PI\\NewOffer.jpg");
        	return new ResponseEntity<Response>(new Response (""),HttpStatus.OK);
        }
        else
@@ -244,7 +254,14 @@ public class OfferRestController {
 		 return Files.readAllBytes(Paths.get(context.getRealPath("/Images/")+offre.getFilename()));
 	 }
  	
- 	
+	@GetMapping("getIdUser/{matricule}/{code}")
+	public int GetUserId(@PathVariable("matricule") String matricule ,@PathVariable("code") String code) {
+	
+		Userr user = userRepository.RetrieveUserbymatriculeandcode(matricule, code);
+		int id = user.getIdUser();
+		return id;
+		
+	}
  	
  	
 }

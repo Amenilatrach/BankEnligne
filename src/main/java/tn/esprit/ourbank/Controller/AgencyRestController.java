@@ -15,9 +15,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import tn.esprit.ourbank.DAO.Entities.Agency;
 import tn.esprit.ourbank.DAO.Entities.Offer;
+import tn.esprit.ourbank.DAO.Repository.AgencyRepository;
+import tn.esprit.ourbank.DAO.Repository.OfferRepository;
+import tn.esprit.ourbank.DAO.Repository.UserrRepository;
 //import tn.esprit.ourbank.DAO.Entities.Staff;
 import tn.esprit.ourbank.Service.Implementation.AgencyServiceImpl;
 import tn.esprit.ourbank.Service.Interface.AgencyService;
+import tn.esprit.ourbank.Service.Interface.UserService;
 
 
 
@@ -27,6 +31,10 @@ public class AgencyRestController {
 	@Autowired
 	AgencyService agencyService;
 	
+	
+	@Autowired
+	UserrRepository userRepository;
+	
 	@GetMapping("allAgencies")
 	public List<Agency> GetAllAgencies(){
 		return agencyService.retrieveAllAgencies();
@@ -35,6 +43,12 @@ public class AgencyRestController {
 	@PostMapping("addAgency")
 	public Agency ajouterAgence(@RequestBody Agency agence)
 		{agencyService.addAgency(agence);
+		return agence;
+		}
+	
+	@PutMapping("addAgencyClients")
+	public Agency ajouterAgenceClient(@RequestBody Agency agence)
+		{agencyService.ajoutavecClient(agence);
 		return agence;
 		}
 	
@@ -85,6 +99,18 @@ public class AgencyRestController {
     
     
    */ 
+     
+     
+     //@PutMapping("editUserAgency/{id}/{idusr}")
+     //public void updateeUserAgency(@PathVariable int id, @PathVariable int idusr) {
+     //	 agencyService.UpdateUserAgency(id, idusr); 
+     //}
+     
+     
+     @PutMapping("editUserAgencyy/{idusr}")
+     public void updateeUserAgency(@RequestBody Agency agency, @PathVariable("idusr") int idusr) {
+    	 userRepository.UpdateUserAgencyy(agency, idusr);
+     }
 
     
     
