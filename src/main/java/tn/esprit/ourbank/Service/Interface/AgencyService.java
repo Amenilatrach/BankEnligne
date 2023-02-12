@@ -11,6 +11,8 @@ public interface AgencyService {
     List<Agency> retrieveAllAgencies();
 	
     Agency addAgency(Agency a);
+    
+    Agency ajoutavecClient(Agency ag);
 	
 	void deleteAgency(int id);
 	
@@ -24,7 +26,7 @@ public interface AgencyService {
 	
 	//public List<String> RetrieveAgencyStafs();
 
-	//public void UpdateStaffAgency();
+	public void UpdateUserAgency(int idAgency, int idUser);
 
 	//public int nbreStaff();
 }
