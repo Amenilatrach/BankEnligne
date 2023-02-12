@@ -2,25 +2,26 @@ package tn.esprit.ourbank.Service.Implementation;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import lombok.extern.slf4j.Slf4j;
 import tn.esprit.ourbank.DAO.Entities.Agency;
+import tn.esprit.ourbank.DAO.Entities.Userr;
 import tn.esprit.ourbank.DAO.Repository.AgencyRepository;
+import tn.esprit.ourbank.DAO.Repository.UserrRepository;
 import tn.esprit.ourbank.Service.Interface.AgencyService;
-//import tn.esprit.ourbank.DAO.Entities.Offer;
-//import tn.esprit.ourbank.DAO.Entities.Staff;
-//import tn.esprit.ourbank.DAO.Repository.StaffRepository;
 @Slf4j
 @Service
 public class AgencyServiceImpl implements AgencyService {
 	
 	@Autowired
 	AgencyRepository agencyRepository;
+	
+	@Autowired
+	UserrRepository userRepository;
 	
 	//@Autowired
 	//StaffRepository staffRepository;
@@ -43,7 +44,7 @@ public class AgencyServiceImpl implements AgencyService {
 		log.info("We are tryning to delete an agency");
 		log.debug("idAgency : "  +id);
 		
-		agencyRepository.deleteById(id);;
+		agencyRepository.deleteById(id);
 		
 	}
 
@@ -90,21 +91,7 @@ public class AgencyServiceImpl implements AgencyService {
 		return Agencies ;
 	}
 
-	@Override
-	public void UpdateStaffAgency() {
-		List<Agency> Agencie = (List<Agency>) (agencyRepository.findAll());
-		List<Staff> Satffs = (List<Staff>) (staffRepository.findAll());
-		for (Agency agency : Agencie) {
-			for (Staff staff : Satffs) {
-				if(agency.getLocation().equals(staff.getLocated())) {
-					agency.getStaffs().add(staff);
-					agencyRepository.save(agency);
-				}
-			}	
-		}
-		
-		
-	}
+	
 
 	@Override
 	public int nbreStaff() {
@@ -117,4 +104,38 @@ public class AgencyServiceImpl implements AgencyService {
 		return 0;
 	}
 */
+
+
+@Override
+public void UpdateUserAgency(int idAgency, int idUser) {
+	userRepository.UpdateUserAgency(idAgency, idUser);
+}
+
+@Override
+public Agency ajoutavecClient(Agency ag) {
+List<Userr> lstUsers = new ArrayList<>(); 
+	
+	lstUsers = ag.getListUser();
+	if(lstUsers != null && lstUsers.size() >0) {
+		for(int i=0 ; i<lstUsers.size(); i++) {
+			lstUsers.get(i).setAgency(ag);
+		}	
+	}
+	
+	ag.setListUser(lstUsers);
+	
+	return agencyRepository.save(ag);
+}
+
+
+
+
+
+	
+	
+	
+	
+	
+	
+	
 }
